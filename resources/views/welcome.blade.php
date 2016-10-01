@@ -11,6 +11,13 @@
                     </ul>
                 </div>
             @endif
+            @if(!empty($errorKey))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ $errorKey }}</li>
+                    </ul>
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">List of Urls</div>
 

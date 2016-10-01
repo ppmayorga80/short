@@ -52,7 +52,6 @@
                 @if(Auth::check())
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/create') }}">Create URL</a></li>
-                        <li><a href="{{ url('/home') }}">Stats</a></li>
                     </ul>
                 @endif
                 <!-- Right Side Of Navbar -->

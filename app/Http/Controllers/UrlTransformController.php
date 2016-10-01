@@ -27,10 +27,21 @@ class UrlTransformController extends Controller
 
         $row = UrlTransform::transformKey($key);
 
-        $row->clicks++;
-        $row->save();
+        if($row)
+        {
+            $row->clicks++;
+            $row->save();
 
-        return redirect($row->original_url);
+            return redirect($row->original_url);
+        }
+        else
+        {
+            if(Auth::check())
+                return view('welcome')->with("urls",UrlTransform::all())->with(array('errorKey' => "Key $key is invalid"));
+            else
+                return view('auth.login');
+        }
+
     }
     public function getNuevo()
     {
