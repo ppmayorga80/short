@@ -6,6 +6,7 @@ use App\UrlTransform;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Auth;
 
 class UrlTransformController extends Controller
 {
@@ -18,7 +19,10 @@ class UrlTransformController extends Controller
     public function index($key=-1)
     {
         if($key<0){
-            return view('welcome')->with("urls",UrlTransform::all());
+            if(Auth::check())
+                return view('welcome')->with("urls",UrlTransform::all());
+            else
+                return view('auth.login');
         }
 
         $row = UrlTransform::transformKey($key);
