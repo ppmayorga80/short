@@ -44,7 +44,11 @@ class UrlTransformController extends Controller
             $flag = UrlTransform::addUrlWithKey($request->input("original_url"),$request->input("short_url"));
             if($flag==0)
             {
-                return redirect()->back()->withInput()->withErrors(array('errorKey' => "Key is assigned"));
+                $id = time();
+                $trans = new UrlTransform();
+                $key = $trans->transform($id);
+
+                return redirect()->back()->withInput()->withErrors(array('errorKey' => "Key is assigned, try with $key"));
 
                 //return redirect()->back()->with('errorKey', ['your message,here']);
             }
