@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/create', 'HomeController@index');
+Route::get('/create', 'UrlTransformController@getNuevo');
+Route::post('/create', 'UrlTransformController@postNuevo');
+
 Route::get('/home', 'HomeController@index');
 Route::get('/{key?}', 'UrlTransformController@index');

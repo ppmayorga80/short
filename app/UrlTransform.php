@@ -99,5 +99,32 @@ class UrlTransform extends Model
         else
             return "";
     }
+    protected function addUrl($url)
+    {
+        $id = time();
+        $key = $this->transform($id);
+
+        $row =  new UrlTransform();
+        $row->original_url = $url;
+        $row->short_url = $key;
+        $row->tag = "auto";
+        $row->save();
+    }
+    protected function addUrlWithKey($url,$key)
+    {
+        $row = UrlTransform::whereShortUrl($key)->first();
+        if(count($row)>0)
+        {
+            return 0;
+        }
+
+        $row =  new UrlTransform();
+        $row->original_url = $url;
+        $row->short_url = $key;
+        $row->tag = "set";
+        $row->save();
+
+        return 1;
+    }
 
 }
